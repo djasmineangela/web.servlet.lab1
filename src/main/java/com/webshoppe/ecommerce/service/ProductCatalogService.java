@@ -12,15 +12,15 @@ import com.webshoppe.ecommerce.exception.ServiceException;
 import com.webshoppe.ecommerce.repository.ProductRepository;
 
 public class ProductCatalogService {
-    private ProductRepository toyRepository;
+    private ProductRepository productRepository;
 
     public ProductCatalogService(ProductRepository toyRepository) {
-        this.toyRepository = toyRepository;
+        this.productRepository = toyRepository;
     }
     
     public List<Product> getProductCatalog(String type) {
         try {
-            return toyRepository.findAllProduct(type);
+            return productRepository.findAllProduct(type);
         } catch (DataAccessException e) {
             throw ServiceException.instance(e.getMessage());
         }
@@ -29,7 +29,7 @@ public class ProductCatalogService {
     
     public List<Product> getProductCatalog(BigDecimal minimumPrice, BigDecimal maximumPrice, String type) {
         try {
-            return toyRepository.findProductsByPrice(minimumPrice, maximumPrice, type);
+            return productRepository.findProductsByPrice(minimumPrice, maximumPrice, type);
         } catch (DataAccessException e) {
             throw ServiceException.instance(e.getMessage());
         }
